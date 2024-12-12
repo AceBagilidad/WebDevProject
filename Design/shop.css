@@ -1,0 +1,973 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    min-width: 100vw;
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 300vh;
+    overflow-x: hidden;
+    background-color: #ffffff;
+    justify-content: flex-start;
+    font-family: 'Poppins', sans-serif;
+}
+
+img {
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.product-page {
+    width: 100vw;
+    min-height: 10vh;
+    height: auto;
+    /* Automatically adjust height based on content */
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+.rectangle-header {
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    background: white;
+    width: 100%;
+    height: 10vh;
+    border: 0.2px solid transparent;
+    border-color: black;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    position: sticky;
+    top: 0;
+}
+
+#navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#navbar li {
+    list-style: none;
+    padding: 0 20px;
+    position: relative;
+}
+
+#navbar li a {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+    font-family: "Poppins", sans-serif;
+    transition: 0.3s ease;
+}
+
+#navbar li a:hover {
+    color: grey;
+}
+
+#navbar li a:hover::after {
+    content: "";
+    width: 60%;
+    height: 2px;
+    background: grey;
+    position: absolute;
+    bottom: -4px;
+    left: 20px;
+}
+
+.icon {
+    font-size: larger;
+}
+
+#mobile {
+    display: none;
+    align-items: center;
+}
+
+#close {
+    display: none;
+}
+/* Dropdown for User Icon */
+/* Dropdown for User Icon */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 1;
+    text-align: center;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 5px 0;
+}
+
+.dropdown-content a:hover {
+    color: #007bff;
+}
+/* LuXe Styling */
+
+.lu-xe a {
+    text-decoration: none;
+}
+
+.lu-xe-text {
+    display: flex;
+    font-family: 'Spectral', serif;
+    font-size: 40px;
+    color: black;
+    /* Initially white */
+    transition: color 0.3s ease;
+    padding: 0;
+    margin: 0;
+}
+
+.lu-xe-span {
+    font-family: 'Space Mono', monospace;
+}
+/* FEATURED PRODUCTS SECTION */
+
+.section-p1 {
+    padding: 40px 80px;
+}
+
+#prod1 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 5%;
+    font-family: "Spartan", sans-serif;
+    text-align: center;
+    line-height: 1.5;
+}
+
+#prod1 h1 {
+    font-size: 60px;
+}
+
+#prod1 .prod a{
+    text-decoration: none;
+}
+
+
+/* Container for search and filter */
+
+.search-filter-container {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search {
+    display: flex;
+    margin-left: 20px;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    width: 40%;
+}
+
+.search input {
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    width: 100%;
+    font-size: medium;
+}
+
+.search i {
+    color: #666;
+}
+
+.filter {
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter i {
+    color: #666;
+    margin-right: 8px;
+}
+
+.filter span {
+    font-size: medium;
+    margin-right: 10px;
+}
+
+.filter select {
+    margin: 0 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: medium;
+}
+/* Products container */
+
+.prod-container {
+    display: flex;
+    padding-top: 10px;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    margin: 20px 20px;
+    gap: 2rem;
+}
+
+.prod-container > * {
+    width: 23%;
+    
+}
+
+
+#prod1 .prod {
+    /* width: 23%;
+    min-width: 250px; */
+    padding: 10px 12px;
+    border: 1px solid #e6e1e1;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.05);
+    /* margin: 15px 0; */
+    transition: 0.2s ease;
+    position: relative;
+}
+
+#prod1 .prod:hover {
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.1);
+}
+
+#prod1 .prod img {
+    width: 100%;
+    height: 40vh;
+    border-radius: 15px;
+}
+
+#prod1 .prod .des {
+    text-align: start;
+    padding: 10px 0;
+}
+
+#prod1 .prod .des span {
+    color: rgb(128, 120, 120);
+    font-size: small;
+}
+
+#prod1 .prod .des h2 {
+    padding-top: 7px;
+    color: black;
+    font-size: large;
+}
+
+#prod1 .prod .des .star i {
+    font-size: small;
+    color: gold;
+}
+
+#prod1 .prod .des h3 {
+    padding-top: 3px;
+    font-size: medium;
+    color: #808080;
+    font-weight: 700;
+}
+
+#prod1 .prod .cart {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50px;
+    font-size: medium;
+    background-color: #4c474740;
+    font-weight: 300;
+    color: rgb(13, 13, 13);
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+}
+/* Page Header */
+
+#page-header {
+    position: relative;
+    /* Positions the element relative to its normal position, allowing for the use of absolute positioning inside */
+    display: flex;
+    /* Applies flexbox layout to the container */
+    color: rgb(255, 251, 251);
+    /* Text color (off-white) */
+    width: 100%;
+    /* The header takes up the full width of the page */
+    height: 45vh;
+    /* The height is set to 45% of the viewport height */
+    background-size: cover;
+    /* Ensures the background image covers the entire area without stretching */
+    background-repeat: none;
+    /* Prevents the background image from repeating */
+    background-position: 10%;
+    /* Positions the background image horizontally at 10% */
+    display: flex;
+    /* Enables flexbox layout again (redundant as it's already declared above) */
+    justify-content: center;
+    /* Centers the content horizontally */
+    text-align: center;
+    /* Centers the text inside the container */
+    flex-direction: column;
+    /* Aligns content vertically (column layout) */
+    z-index: 1;
+    /* Ensures that the content in this section appears above lower layers */
+}
+
+#page-header::before {
+    content: "";
+    /* Creates a pseudo-element for the background overlay */
+    position: absolute;
+    /* Positions this pseudo-element relative to its nearest positioned ancestor */
+    width: 100%;
+    /* Takes up the full width of the parent container */
+    height: 100%;
+    /* Takes up the full height of the parent container */
+    background-image: url('../Image/shop-bg.jpg');
+    background-size: cover;
+    /* Ensures the background image covers the entire pseudo-element */
+    background-position: 10%;
+    /* Positions the background image horizontally at 10% */
+    filter: brightness(75%);
+    /* Darkens the background image to 75% brightness for better contrast with text */
+    z-index: -1;
+    /* Ensures this pseudo-element appears behind the other content */
+}
+
+#page-header h1,
+#page-header p {
+    position: relative;
+    /* Ensures that these elements are positioned above the pseudo-element */
+    z-index: 2;
+    /* Makes sure the text appears above both the pseudo-element and background */
+}
+
+.header-text {
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.9);
+}
+
+.header-text h1 {
+    font-size: 3rem;
+}
+/*Design for sproduct.html   */
+/* Single Product CSS */
+
+#prod-details {
+    display: flex;
+    margin-top: 80px;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
+/* Product image styling */
+
+#prod-details .sprod-image {
+    width: 45%;
+    height: auto;
+    margin-right: 50px;
+}
+
+#mainImg {
+    border-radius: 20px;
+}
+/* Product details styling */
+
+#prod-details .sprod-details {
+    width: 50%;
+    padding-top: 30px;
+}
+/* Product title and headers */
+
+#prod-details .sprod-details h6 {
+    padding: 20px 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+}
+
+#prod-details .sprod-details h4 {
+    font-size: 36px;
+    padding-bottom: 15px;
+    font-weight: bold;
+    color: #333;
+}
+/* Price styling */
+
+#prod-details .sprod-details h2 {
+    font-size: 28px;
+    color: #e63946;
+    margin-bottom: 20px;
+}
+/* Quantity input box */
+
+#prod-details .sprod-details input {
+    width: 60px;
+    height: 35px;
+    padding-left: 10px;
+    font-size: 16px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+/* Add to Cart button */
+
+.sprod-details .button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sprod-details .button:hover {
+    background-color: #e63946;
+}
+/* Product details title */
+
+.product-details-title {
+    display: block;
+    margin-top: 30px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+}
+/* Product description */
+
+.product-description {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+/* Average rating display */
+
+.average-rating {
+    margin-bottom: 20px;
+}
+
+.rating {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.rating span {
+    font-size: 24px;
+    color: #FFD700;
+    /* Gold stars */
+}
+/* Rating container */
+
+.rating-input {
+    display: flex;
+    flex-direction: row-reverse;
+    /* Reverse the order of the stars */
+    justify-content: flex-end;
+    margin: 10px 0;
+}
+/* Hide the radio buttons */
+
+.rating-input input[type="radio"] {
+    display: none;
+}
+/* Base style for the stars */
+
+.rating-input label {
+    font-size: 30px;
+    color: #ddd;
+    /* Unselected star color */
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+/* Hover effect: highlight from left to right */
+/* The "~" selector applies the style to all labels after the hovered one, 
+creating the effect of filling up all the stars up to the one you're hovering over */
+
+.rating-input label:hover,
+.rating-input label:hover~label {
+    color: #FFD700;
+    /* Gold color for hovered stars */
+}
+/* Keep stars highlighted after selection */
+
+.rating-input input:checked~label {
+    color: #FFD700;
+    /* Gold color for the selected star */
+}
+/* Reviews section */
+
+.review-section {
+    margin-top: 40px;
+    border-top: 1px solid #e6e6e6;
+    padding-top: 20px;
+}
+/* Review form styling */
+
+.review-form {
+    margin-top: 20px;
+}
+
+.review-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    resize: none;
+    margin-bottom: 10px;
+}
+
+.submit-comment {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-comment:hover {
+    background-color: #e63946;
+}
+/* Review comments */
+
+.review-comments {
+    margin-top: 30px;
+}
+
+.review {
+    margin-bottom: 20px;
+}
+
+.review p {
+    font-size: 14px;
+    color: #444;
+    margin: 10px 0;
+}
+
+.review strong {
+    color: #333;
+    font-size: 15px;
+}
+
+.review-date {
+    font-size: 12px;
+    color: #888;
+    margin-left: 10px;
+    font-style: italic;
+}
+/* Review section title */
+
+.review-section h6 {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+    font-size: 20px;
+}
+/* Cart Page */
+
+#cart {
+    overflow-x: auto;
+    /* Allows horizontal scrolling if the table content overflows */
+}
+
+#cart table {
+    margin-top: 5%;
+    width: 100%;
+    border-collapse: collapse;
+    /* Merges table borders for a cleaner look */
+    table-layout: fixed;
+    /* Fixes the width of table columns */
+    white-space: nowrap;
+    /* Prevents text from wrapping, forcing it to stay in a single line */
+}
+
+#cart table img {
+    width: 100px;
+    /* Sets a fixed width for images in the table */
+}
+
+#cart table td:nth-child(1) {
+    width: 100px;
+    text-align: center;
+    /* Sets the width and centers content in the first column */
+}
+
+#cart table td:nth-child(2) {
+    width: 150px;
+    text-align: center;
+    /* Sets the width and centers content in the second column */
+}
+
+#cart table td:nth-child(3) {
+    width: 250px;
+    text-align: center;
+    /* Sets the width and centers content in the third column */
+}
+
+#cart table td:nth-child(4),
+#cart table td:nth-child(5),
+#cart table td:nth-child(6) {
+    width: 150px;
+    text-align: center;
+    /* Sets width and centers content for the fourth, fifth, and sixth columns */
+}
+
+#cart table td:nth-child(5) input {
+    width: 70px;
+    padding: 10px 5px 10px 5px;
+    /* Sets a specific width and padding for input elements in the fifth column */
+}
+
+#cart table thead {
+    border: 1px solid rgb(74, 72, 72);
+    border-left: none;
+    border-right: none;
+    /* Adds a border to the top and bottom of the table header */
+}
+
+#cart table thead td {
+    font-weight: 700;
+    /* Makes the header text bold */
+    text-transform: uppercase;
+    /* Converts the header text to uppercase */
+    font-size: 13px;
+    padding: 18px 0;
+    /* Adds padding to the table header cells */
+}
+
+#cart table tbody tr td {
+    padding-top: 15px;
+    /* Adds padding to the top of each table body cell */
+}
+
+#cart table tbody td {
+    font-size: 15px;
+    /* Sets a font size for the table body cells */
+}
+
+
+
+ 
+ .quantity-form input {
+    width: 45px !important;
+    height: 35px;
+    font-size: 15px;
+    margin-left: 38%;
+    border: none;
+    text-align: center;
+    pointer-events: none;
+    
+}
+
+
+/* Cart Quantity buttons */
+.quantity-form .cart-qty-btn{
+    background-color: #fefefe; 
+    color: #0a0a0a; 
+    border: none; 
+    padding: 5px 10px; 
+    font-size: 20px;
+    cursor: pointer;   
+
+}
+/* Cart Subtotal Section */
+
+#card-add {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* Aligns and wraps the elements inside the subtotal container */
+}
+
+.cart-addSec {
+    display: flex;
+    margin-left: -50%;
+    width: 250%;
+    /* Adjusts the width and alignment of the cart section */
+}
+
+#subtotal {
+    justify-content: center;
+    margin-right: 150px;
+    width: 250%;
+    margin-bottom: 30px;
+    border: 1px solid rgb(74, 72, 72);
+    padding: 10px;
+    
+    
+}
+
+#subtotal table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+    /* Sets the table to use collapsed borders and specifies margin and width */
+}
+
+#subtotal h3 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    /* Styles the subtotal heading */
+}
+
+#subtotal table td {
+    width: 50%;
+    border: 1px solid rgb(74, 72, 72);
+    padding: 10px;
+    font-size: 13px;
+    /* Sets width, border, padding, and font size for subtotal table cells */
+}
+
+#subtotal button {
+    background-color: grey;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    float: right;
+
+
+    
+}
+/* FOOTER CSS */
+
+footer {
+    background-color: black;
+    color: white;
+    padding: 40px 20px;
+    width: 100vw;
+    /* Ensure footer occupies full viewport width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    /* Ensure padding is included in width calculation */
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    /* Use 100% of available width */
+    max-width: 100vw;
+    /* Maintain the full viewport width */
+    padding: 0 20px;
+    /* Add some padding for spacing */
+    box-sizing: border-box;
+}
+
+footer .col {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 20px;
+    min-width: 250px;
+}
+
+footer h4,
+footer h5,
+footer h6 {
+    font-size: 26px;
+    padding-bottom: 12px;
+    font-weight: bold;
+}
+
+footer p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+footer .icons {
+    display: flex;
+    gap: 20px;
+}
+
+footer .icons a {
+    color: white;
+    font-size: 24px;
+    transition: color 0.3s;
+}
+
+footer .icons a:hover {
+    color: #ccc;
+}
+
+footer .col-payment img {
+    width: 80px;
+    height: 35px;
+    margin-right: 10px;
+}
+
+footer .copyright {
+    width: 100%;
+    /* Ensure copyright section spans the full width */
+    text-align: center;
+    margin-top: 40px;
+    font-size: 15px;
+    padding-top: 20px;
+}
+/* MEDIA QUERIES */
+/* Tablets and smaller devices */
+/* Responsive adjustments */
+
+@media (max-width: 1200px) {
+    .footer-container {
+        max-width: 100vw;
+        /* Ensure footer container uses the full viewport width */
+    }
+}
+/* Tablet */
+
+@media (max-width: 799px) {
+    #navbar {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        position: fixed;
+        top: 0;
+        right: -300px;
+        height: 100vh;
+        width: 170px;
+        border: 2px solid black;
+        border-color: black;
+        border-right: none;
+        border-radius: 15px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        background-color: #ffffff;
+        box-shadow: 0 40px 60px rgba(0, 0, 0, 0.1);
+        padding: 80px 0 0;
+        transition: 0.3s ease-out;
+    }
+    #navbar li {
+        margin-bottom: 25px;
+    }
+    #navbar.active {
+        right: 0px;
+    }
+    #mobile {
+        display: flex;
+        align-items: center;
+    }
+    #mobile i {
+        padding-left: 10px;
+    }
+    #close {
+        display: initial;
+        position: absolute;
+        top: 30px;
+        left: 80%;
+        color: black;
+        font-size: 30px;
+    }
+    #nav-icon {
+        display: none;
+    }
+    .section-p1 {
+        padding: 40px 40px;
+    }
+    .search-filter-container {
+        margin-top: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+    .search {
+        display: flex;
+        margin-left: 5px;
+        align-items: center;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 5px 10px;
+        width: 90%;
+    }
+    #prod1 h1 {
+        font-size: 36px;
+    }
+    #prod1 .prod-container {
+        align-items: center;
+    }
+    #prod1 .prod {
+        width: 90%;
+        margin: 10px 0;
+    }
+    #page-header {
+        height: 25vh;
+    }
+    .header-text h1 {
+        font-size: 2rem;
+    }
+}
+/* Smaller mobile devices  */
+
+@media (max-width: 480px) {
+    #prod1 h1 {
+        font-size: 30px;
+    }
+    #prod1 .prod {
+        width: 95%;
+    }
+    #page-header {
+        height: 20vh;
+    }
+    .header-text h1 {
+        font-size: 1.8rem;
+    }
+    #cart-add {
+        flex-direction: column;
+    }
+}
+
+
+
+
+
+
