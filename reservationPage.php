@@ -1,27 +1,39 @@
 <?php
 session_start();
 
-include('./action/manageCart.php');
+include('./config/dbconnection.php');
 
 // Check if the user is logged in
 if (!isset($_SESSION['userId'])) {
     echo "<script>alert('Error: You must be logged in to access your reservations.'); window.location.href = './loginPage.php';</script>";
-    exit; // Stop further execution of the script
+    exit; 
 }
 
 $user_id = $_SESSION['userId'];
 
-// Fetch reserved items for the logged-in user
+// delete reservation
+if(isset($_GET['delete_id'])) {
+    $product_id = $_GET['delete_id'];
+    $delete_query = "DELETE FROM reservations WHERE user_id = $user_id AND product_id = $product_id";
+
+    if ($conn->query($delete_query)) {
+        header("Location: ./reservationPage.php");
+    } else {
+        echo "Error deleting reservation: " . $conn->error;
+    }
+
+    exit;
+}
+
 $reservation_query = "
     SELECT r.product_id, r.quantity, p.name, p.price, p.image_url 
     FROM reservations r
     JOIN products p ON r.product_id = p.id
-    WHERE r.user_id = ?
+    WHERE r.user_id = $user_id
 ";
-$reservation_stmt = $conn->prepare($reservation_query);
-$reservation_stmt->bind_param("i", $user_id);
-$reservation_stmt->execute();
-$reservation_result = $reservation_stmt->get_result();
+
+$reservation_result = $conn->query($reservation_query);
+$reservation_products = $reservation_result->fetch_all(MYSQLI_ASSOC);
 
 ?>
 
@@ -66,12 +78,12 @@ $reservation_result = $reservation_stmt->get_result();
             <?php
             $total = 0;
             if ($reservation_result->num_rows > 0) {
-                while ($item = $reservation_result->fetch_assoc()) {
+                foreach ($reservation_products as $item) {
                     $subtotal = $item['price'] * $item['quantity'];
                     $total += $subtotal;
             ?>
                 <tr>
-                    <td><a href="reservationPage.php?delete_id=<?php echo $item['product_id']; ?>"><i class="far fa-times-circle"></i></a></td>
+                    <td><a href="./reservationPage.php?delete_id=<?php echo $item['product_id']; ?>"><i class="far fa-times-circle"></i></a></td>
                     <td><img src="<?php echo htmlspecialchars($item['image_url']); ?>" alt="Product Image"></td>
                     <td>
                         <a href="sproduct.php?id=<?php echo $item['product_id']; ?>">
