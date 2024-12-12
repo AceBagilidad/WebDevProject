@@ -46,9 +46,6 @@ $username = htmlspecialchars($_SESSION['username']);
         <li class="nav-item">
             <a href="#about-section">About</a>
         </li>
-        <li class="nav-item">
-            <a href="#contact-section">Contact</a>
-        </li>
     </ul>
 </div>
 <div class="icons-button">

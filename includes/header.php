@@ -15,7 +15,6 @@ include("config/dbconnection.php");
             <li><a href="index.php">Home</a></li>
             <li><a href="shop.php">Shop</a></li>
             <li><a href="#about-section">About</a></li>
-            <li><a href="#contact-section">Contact</a></li>
             <li id="nav-icon">
                 <?php if (isset($_SESSION['username'])): ?>
                     <!-- User is logged in -->
