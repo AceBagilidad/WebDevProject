@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include './config/dbconnection.php';
 
 // Get the product_id from the URL
