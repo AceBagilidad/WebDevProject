@@ -4,7 +4,7 @@ include("config/dbconnection.php");
 
 <section class="rectangle-header">
     <div class="lu-xe">
-        <a href="#">
+        <a href="./">
             <p class="lu-xe-text">
                 Lu<span class="lu-xe-span">X</span>e
             </p>
@@ -15,13 +15,16 @@ include("config/dbconnection.php");
             <li><a href="index.php">Home</a></li>
             <li><a href="shop.php">Shop</a></li>
             <li><a href="#about-section">About</a></li>
+            <li class="nav-mobile"><a href="./cart.php">Cart</a></li>
+            <li class="nav-mobile"><a href="./reservationPage.php">Reservations</a></li>
+            <li class="nav-mobile"><a href="javascript:void(0);" onclick="logoutConfirm()">Log Out</a></li>
             <li id="nav-icon">
                 <?php if (isset($_SESSION['username'])): ?>
                     <!-- User is logged in -->
                     <div class="dropdown">
                         <i class='bx bx-user icon'></i>
                         <div class="dropdown-content">
-                            <!-- Trigger logoutConfirm() when clicking Log Out -->
+                            <a href="./reservationPage.php">Reservations</a>
                             <a href="javascript:void(0);" onclick="logoutConfirm()">Log Out</a>
                         </div>
                     </div>
@@ -36,8 +39,8 @@ include("config/dbconnection.php");
         </ul>
     </div>
     <div id="mobile">
-        <a href="loginPage.php"> <i class='bx bx-user icon'></i></a>
-        <a href="cart.php"> <i class='bx bx-cart icon'></i></a>
+        <!-- <a href="loginPage.php"> <i class='bx bx-user icon'></i></a> -->
+        <!-- <a href="cart.php"> <i class='bx bx-cart icon'></i></a> -->
         <i id="bar" class="fas fa-outdent"></i>
     </div>
 </section>

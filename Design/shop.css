@@ -72,16 +72,18 @@ main {
     font-size: 16px;
     font-weight: 600;
     color: black;
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
     transition: 0.3s ease;
 }
 
 #navbar li a:hover {
     color: grey;
 }
-
+.nav-mobile {
+    display: none;
+}
 #navbar li a:hover::after {
-    content: "";
+    content: '';
     width: 60%;
     height: 2px;
     background: grey;
@@ -166,7 +168,7 @@ main {
     flex-direction: column;
     width: 100%;
     margin-top: 5%;
-    font-family: "Spartan", sans-serif;
+    font-family: 'Spartan', sans-serif;
     text-align: center;
     line-height: 1.5;
 }
@@ -175,10 +177,9 @@ main {
     font-size: 60px;
 }
 
-#prod1 .prod a{
+#prod1 .prod a {
     text-decoration: none;
 }
-
 
 /* Container for search and filter */
 
@@ -212,7 +213,6 @@ main {
 }
 
 .filter {
-    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -248,9 +248,7 @@ main {
 
 .prod-container > * {
     width: 23%;
-    
 }
-
 
 #prod1 .prod {
     /* width: 23%;
@@ -348,7 +346,7 @@ main {
 }
 
 #page-header::before {
-    content: "";
+    content: '';
     /* Creates a pseudo-element for the background overlay */
     position: absolute;
     /* Positions this pseudo-element relative to its nearest positioned ancestor */
@@ -377,7 +375,7 @@ main {
 
 .header-text {
     justify-content: center;
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.1rem;
     line-height: 1.8;
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.9);
@@ -492,7 +490,7 @@ main {
 
 .rating span {
     font-size: 24px;
-    color: #FFD700;
+    color: #ffd700;
     /* Gold stars */
 }
 /* Rating container */
@@ -506,7 +504,7 @@ main {
 }
 /* Hide the radio buttons */
 
-.rating-input input[type="radio"] {
+.rating-input input[type='radio'] {
     display: none;
 }
 /* Base style for the stars */
@@ -519,18 +517,18 @@ main {
     transition: color 0.2s ease-in-out;
 }
 /* Hover effect: highlight from left to right */
-/* The "~" selector applies the style to all labels after the hovered one, 
+/* The "~" selector applies the style to all labels after the hovered one,
 creating the effect of filling up all the stars up to the one you're hovering over */
 
 .rating-input label:hover,
-.rating-input label:hover~label {
-    color: #FFD700;
+.rating-input label:hover ~ label {
+    color: #ffd700;
     /* Gold color for hovered stars */
 }
 /* Keep stars highlighted after selection */
 
-.rating-input input:checked~label {
-    color: #FFD700;
+.rating-input input:checked ~ label {
+    color: #ffd700;
     /* Gold color for the selected star */
 }
 /* Reviews section */
@@ -609,6 +607,7 @@ creating the effect of filling up all the stars up to the one you're hovering ov
 
 #cart {
     overflow-x: auto;
+    width: 100%;
     /* Allows horizontal scrolling if the table content overflows */
 }
 
@@ -687,10 +686,7 @@ creating the effect of filling up all the stars up to the one you're hovering ov
     /* Sets a font size for the table body cells */
 }
 
-
-
- 
- .quantity-form input {
+.quantity-form input {
     width: 45px !important;
     height: 35px;
     font-size: 15px;
@@ -698,19 +694,16 @@ creating the effect of filling up all the stars up to the one you're hovering ov
     border: none;
     text-align: center;
     pointer-events: none;
-    
 }
 
-
 /* Cart Quantity buttons */
-.quantity-form .cart-qty-btn{
-    background-color: #fefefe; 
-    color: #0a0a0a; 
-    border: none; 
-    padding: 5px 10px; 
+.quantity-form .cart-qty-btn {
+    background-color: #fefefe;
+    color: #0a0a0a;
+    border: none;
+    padding: 5px 10px;
     font-size: 20px;
-    cursor: pointer;   
-
+    cursor: pointer;
 }
 /* Cart Subtotal Section */
 
@@ -735,8 +728,6 @@ creating the effect of filling up all the stars up to the one you're hovering ov
     margin-bottom: 30px;
     border: 1px solid rgb(74, 72, 72);
     padding: 10px;
-    
-    
 }
 
 #subtotal table {
@@ -768,9 +759,6 @@ creating the effect of filling up all the stars up to the one you're hovering ov
     border-radius: 15px;
     cursor: pointer;
     float: right;
-
-
-    
 }
 /* FOOTER CSS */
 
@@ -898,6 +886,9 @@ footer .copyright {
     #mobile i {
         padding-left: 10px;
     }
+    .nav-mobile {
+        display: block;
+    }
     #close {
         display: initial;
         position: absolute;
@@ -965,9 +956,3 @@ footer .copyright {
         flex-direction: column;
     }
 }
-
-
-
-
-
-

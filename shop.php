@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 // Get the logged-in username
 $username = '';
@@ -6,10 +6,16 @@ if(isset($_SESSION['username'])) {
 $username = htmlspecialchars($_SESSION['username']);
 }
 
+$category = '';
+
+if(isset($_GET['category'])) {
+    $category = $_GET['category'];
+}
+
 include("config/dbconnection.php");
 // Fetch products from the database
 $sql = "
-    SELECT p.id, p.name, p.price, p.image_url, p.category, 
+    SELECT p.id, p.name, p.price, p.image_url, p.category,
     COALESCE(AVG(r.rating), 0) AS rating
     FROM products p
     LEFT JOIN reviews r ON p.id = r.product_id
@@ -17,6 +23,15 @@ $sql = "
 ";
 $result = $conn->query($sql);
 $products = $result->fetch_all(MYSQLI_ASSOC);
+
+$filters = [
+    '' => 'All',
+    'choker' => 'Choker',
+    'necklace' => 'Necklace',
+    'bracelet' => 'Bracelet',
+    'earring' => 'Earrings',
+    'anklet' => 'Anklet'
+];
 
  ?>
 
@@ -52,19 +67,18 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
         <p>Exclusive Accessories New Modern Design </p>
 
         <div class="search-filter-container">
-      
+
 
         <!-- Filter section -->
         <div class="filter">
             <i class="fal fa-filter"></i>
             <span>Filter by:</span>
             <select id="categoryFilter">
-                <option value="">All</option>
-                <option value="choker">Choker</option>
-                <option value="necklace">Necklace</option>
-                <option value="bracelet">Bracelet</option>
-                <option value="anklet">Anklet</option>
-                <option value="earring">Earrings</option>
+                <?php foreach($filters as $value => $label): ?>
+                    <option value="<?php echo $value; ?>" <?php echo $value === $category ? 'selected' : ''; ?>>
+                        <?php echo $label; ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
 
 
@@ -79,21 +93,21 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
     </div>
     <div class="prod-container">
     <?php
-    
+
         if (count($products) > 0) {
-            foreach($products as $product) {    
+            foreach($products as $product) {
                 $rating = round($product['rating']);  // Round the rating to the nearest integer
-                echo '<div class="prod" data-id="' . $product['id'] . '" 
-                        data-category="' . htmlspecialchars($product['category']) . '" 
-                            data-name="' . htmlspecialchars($product['name']) . '" 
-                            data-price="' . htmlspecialchars($product['price']) . '" 
+                echo '<div class="prod" data-id="' . $product['id'] . '"
+                        data-category="' . htmlspecialchars($product['category']) . '"
+                            data-name="' . htmlspecialchars($product['name']) . '"
+                            data-price="' . htmlspecialchars($product['price']) . '"
                             data-rating="' . htmlspecialchars($product['rating']) . '">
                             <img src="' . htmlspecialchars($product['image_url']) . '" alt="">
                             <div class="des">
                                 <span>LuXe</span>
                                 <h2>' . htmlspecialchars($product['name']) . '</h2>
                                 <div class="star">';
-                                
+
                 for ($i = 0; $i < 5; $i++) {
                     echo $i < $rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>';
                 }
@@ -108,7 +122,7 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
         } else {
             echo "<p>No products available.</p>";
         }
-    ?> 
+    ?>
 </div>
 
 
@@ -117,6 +131,6 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
     <?php include('./includes/footer.php')?>
     <script src="./Design/JavaScript/filterProd.js"></script>
     <script src="./Design/JavaScript/hamburger.js"></script>
-   
+
 </body>
 </html>

@@ -35,7 +35,6 @@ img {
     object-fit: cover;
 }
 
-
 /* Rectangle Header Outline */
 
 .rectangle-header {
@@ -50,7 +49,6 @@ img {
     transition: background 0.3s ease, border-color 0.3s ease;
     border-top: none;
 }
-
 
 /* LuXe Styling */
 
@@ -72,7 +70,6 @@ img {
     font-family: 'Space Mono', monospace;
 }
 
-
 /* Navigation Styling */
 
 .nav-item {
@@ -84,7 +81,7 @@ img {
 .nav-item a {
     color: #ffffff;
     font-size: 20px;
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     transition: color 0.3s ease;
     text-decoration: none;
@@ -95,7 +92,7 @@ img {
 }
 
 .nav-item a:hover::after {
-    content: "";
+    content: '';
     width: 50%;
     height: 2px;
     background: grey;
@@ -104,7 +101,6 @@ img {
     left: 5px;
 }
 
-
 /* Specific positions for each section */
 
 .navigation ul {
@@ -112,7 +108,6 @@ img {
     gap: 3rem;
     padding: 0;
 }
-
 
 /* User Icon Style */
 
@@ -208,14 +203,12 @@ body.scrolled .icons-button i {
     color: #555; /* Slightly lighter shade on hover */
 }
 
-
-
 /* MAIN CONTENT STYLES */
 
 .hero-section {
     width: 100vw;
     height: 100vh;
-    background-image: url("../Image/body-1.png");
+    background-image: url('../Image/body-1.png');
     background-repeat: none;
     background-size: cover;
     display: flex;
@@ -223,14 +216,13 @@ body.scrolled .icons-button i {
     align-items: center;
 }
 
-
 /* hero-text */
 
 .hero-text {
-    color: #FBFBFB;
+    color: #fbfbfb;
     width: 820px;
     height: auto;
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
     text-align: center;
     padding: 20px;
     display: flex;
@@ -250,7 +242,6 @@ body.scrolled .icons-button i {
     /* margin: 0; */
     /* padding: 20px; */
 }
-
 
 /*  Container 2 */
 
@@ -281,7 +272,7 @@ body.scrolled .icons-button i {
 
 .section-two-text {
     color: white;
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
     max-width: 40%;
     line-height: 1.6;
     padding: 10px;
@@ -366,14 +357,12 @@ body.scrolled .icons-button i {
     opacity: 0.4;
 }
 
-
 /* here n = 0, 1, 2, 3,... */
 
-.slide .item:nth-child(n+6) {
+.slide .item:nth-child(n + 6) {
     /* left: calc(50% + 660px); */
     opacity: 0;
 }
-
 
 /* Display captions properly */
 
@@ -382,7 +371,7 @@ body.scrolled .icons-button i {
     text-align: left;
     color: #ffffff;
     /* transform: translate(0, -50%); */
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
     display: none;
     position: absolute;
     left: -45%;
@@ -419,7 +408,6 @@ body.scrolled .icons-button i {
     cursor: pointer;
     opacity: 0;
     animation: animate 0.5s ease-in-out 0.6s 1 forwards;
-    
 }
 
 .content button:hover {
@@ -462,7 +450,6 @@ body.scrolled .icons-button i {
     color: #fff;
 }
 
-
 /* Popular Products */
 
 .section-p1 {
@@ -474,7 +461,7 @@ body.scrolled .icons-button i {
     flex-direction: column;
     width: 100%;
     margin-top: 5%;
-    font-family: "Spartan", sans-serif;
+    font-family: 'Spartan', sans-serif;
     text-align: center;
     line-height: 1.5;
 }
@@ -482,7 +469,6 @@ body.scrolled .icons-button i {
 #prod1 h1 {
     font-size: 60px;
 }
-
 
 .prod-container {
     display: flex;
@@ -493,7 +479,7 @@ body.scrolled .icons-button i {
     gap: 2rem;
 }
 
-.prod a{
+.prod a {
     text-decoration: none;
 }
 #prod1 .prod {
@@ -560,7 +546,6 @@ body.scrolled .icons-button i {
     bottom: 20px;
     right: 10px;
 }
-
 
 /* FOOTER CSS */
 
@@ -642,7 +627,6 @@ footer .copyright {
     padding-top: 20px;
 }
 
-
 /* Responsive adjustments */
 
 @media (max-width: 1200px) {
@@ -652,5 +636,22 @@ footer .copyright {
     }
 }
 
+@media (max-width: 799px) {
+    .slide .item:nth-child(1),
+    .slide .item:nth-child(2),
+    .slide .item:nth-child(4),
+    .slide .item:nth-child(5) {
+        opacity: 0;
+    }
 
+    .slide .item:nth-child(3) {
+        position: absolute;
+        bottom: -50%;
+    }
+
+    .slide .item:nth-child(3) .content {
+        position: absolute;
+        bottom: 150%;
+    }
+}
 /* Media Query */

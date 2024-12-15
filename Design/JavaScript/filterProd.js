@@ -8,7 +8,6 @@ let filteredProducts = []; // This will store products filtered by category
 // Function to render the products (both for initial load and sorting/filtering)
 // Function to render the products (both for initial load and sorting/filtering)
 function renderProducts(products) {
-
     productsContainer.innerHTML = ''; // Clear previous products
 
     if (products.length === 0) {
@@ -16,18 +15,14 @@ function renderProducts(products) {
         return;
     }
 
-    products.forEach(product => {
-
-
-
+    products.forEach((product) => {
         const productElement = document.createElement('div');
         productElement.classList.add('prod');
         productElement.setAttribute('data-category', product.category);
         productElement.setAttribute('data-name', product.name);
         productElement.setAttribute('data-price', product.price);
         productElement.setAttribute('data-rating', product.rating);
-        productElement.setAttribute('data-id', product.id);  // Store the product id in the data attribute
-
+        productElement.setAttribute('data-id', product.id); // Store the product id in the data attribute
 
         const stars = getRating(product.rating);
 
@@ -45,7 +40,7 @@ function renderProducts(products) {
         productElement.addEventListener('click', () => {
             // Get the product id from the data-id attribute
             const productId = productElement.getAttribute('data-id');
-            
+
             // Log the product id to the console
             console.log('Product ID clicked:', productId);
 
@@ -56,7 +51,6 @@ function renderProducts(products) {
         productsContainer.appendChild(productElement);
     });
 }
-
 
 function getRating(rating) {
     let ratingHtml = '';
@@ -70,18 +64,17 @@ function getRating(rating) {
 function loadInitialProducts() {
     const productElements = document.querySelectorAll('.prod');
 
-    productElements.forEach(productElement => {
+    productElements.forEach((productElement) => {
         const product = {
             id: productElement.dataset.id,
             name: productElement.querySelector('h2').textContent,
             category: productElement.dataset.category,
             price: parseFloat(productElement.getAttribute('data-price')),
             rating: parseInt(productElement.getAttribute('data-rating')),
-            image_url: productElement.querySelector('img').src
+            image_url: productElement.querySelector('img').src,
         };
         productData.push(product);
     });
-
 
     filteredProducts = [...productData]; // Initially, show all products
     renderProducts(filteredProducts); // Render the products initially
@@ -89,13 +82,16 @@ function loadInitialProducts() {
 
 // Handle category filter change
 categoryFilter.addEventListener('change', () => {
-    const selectedCategory = categoryFilter.value;
-    filteredProducts = selectedCategory ? 
-        productData.filter(product => product.category === selectedCategory) :
-        [...productData]; // Reset to all products if no category is selected
-
-    renderProducts(filteredProducts); // Render filtered products
+    handleCategoryChange();
 });
+
+function handleCategoryChange() {
+    const selectedCategory = categoryFilter.value;
+    filteredProducts = selectedCategory
+        ? productData.filter((product) => product.category === selectedCategory)
+        : [...productData]; // Reset to all products if no category is selected
+    renderProducts(filteredProducts); // Render filtered products
+}
 
 // Sort functionality
 sortFilter.addEventListener('change', () => {
@@ -115,4 +111,7 @@ sortFilter.addEventListener('change', () => {
 });
 
 // Load the initial products from PHP rendering
-document.addEventListener('DOMContentLoaded', loadInitialProducts);
+document.addEventListener('DOMContentLoaded', () => {
+    loadInitialProducts();
+    handleCategoryChange();
+});

@@ -6,7 +6,7 @@ include('./config/dbconnection.php');
 // Check if the user is logged in
 if (!isset($_SESSION['userId'])) {
     echo "<script>alert('Error: You must be logged in to access your reservations.'); window.location.href = './loginPage.php';</script>";
-    exit; 
+    exit;
 }
 
 $user_id = $_SESSION['userId'];
@@ -26,7 +26,7 @@ if(isset($_GET['delete_id'])) {
 }
 
 $reservation_query = "
-    SELECT r.product_id, r.quantity, p.name, p.price, p.image_url 
+    SELECT r.product_id, r.quantity, p.name, p.price, p.image_url
     FROM reservations r
     JOIN products p ON r.product_id = p.id
     WHERE r.user_id = $user_id
@@ -58,7 +58,7 @@ $reservation_products = $reservation_result->fetch_all(MYSQLI_ASSOC);
 
     <section id="page-header">
         <div class="header-text">
-            <h1>#reservation</h1>
+            <h1>Reservation</h1>
         </div>
     </section>
 

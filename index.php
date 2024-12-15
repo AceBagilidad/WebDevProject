@@ -14,7 +14,7 @@ $popular_products_query = "
     FROM products p
     LEFT JOIN reviews r ON p.id = r.product_id
     GROUP BY p.id
-    HAVING avg_rating > 2  
+    HAVING avg_rating > 2
     ORDER BY avg_rating DESC";
 
 $popular_products_result = $conn->query($popular_products_query);
@@ -62,6 +62,7 @@ $popular_products = $popular_products_result->fetch_all(MYSQLI_ASSOC);
                 <div class="dropdown">
                     <i class='bx bx-user icon'></i>
                     <div class="dropdown-content">
+                        <a href="./reservationPage.php">Reservations</a>
                         <a href="action/logout.php">Log Out</a>
                     </div>
                 </div>
@@ -97,7 +98,7 @@ $popular_products = $popular_products_result->fetch_all(MYSQLI_ASSOC);
                         <div class="name">The LuXe Bracelet</div>
                         <div class="des">A seamless blend of style and sophistication, the LuXe Bracelet is designed to enhance any outfit with its refined elegance. Perfect for daily wear, this bracelet adds a touch of luxury that effortlessly elevates your look, making it an essential accessory for every occasion.</div>
                         <!-- Pass 'bracelets' as the category in the query string -->
-                        <a href="shop.php?category=bracelets"><button>Shop Now</button> </a>
+                        <a href="shop.php?category=bracelet"><button>Shop Now</button> </a>
                     </div>
                 </div>
                 <div class="item" style="background-image: url('./Image/img2.png');">
@@ -105,7 +106,7 @@ $popular_products = $popular_products_result->fetch_all(MYSQLI_ASSOC);
                         <div class="name">The LuXe Anklet</div>
                         <div class="des">A subtle statement of elegance for your everyday look. This anklet adds a hint of sophistication and charm, designed to be both timeless and versatile for any occasion.</div>
                         <!-- Pass 'anklets' as the category in the query string -->
-                        <a href="shop.php?category=anklets"><button>Shop Now</button> </a>
+                        <a href="shop.php?category=anklet"><button>Shop Now</button> </a>
                     </div>
                 </div>
                 <div class="item" style="background-image: url('./Image/Choker/black-leather-choker-necklace.jpg');">
@@ -113,7 +114,7 @@ $popular_products = $popular_products_result->fetch_all(MYSQLI_ASSOC);
                         <div class="name">The LuXe Choker</div>
                         <div class="des">Bold and refined, the LuXe Choker adds an edge to any outfit. Crafted for comfort and style, it's the perfect blend of modern elegance and statement-making design.</div>
                         <!-- Pass 'chokers' as the category in the query string -->
-                        <a href="shop.php?category=chokers"><button>Shop Now</button> </a>
+                        <a href="shop.php?category=choker"><button>Shop Now</button> </a>
                     </div>
                 </div>
                 <div class="item" style="background-image: url('./Image/img4.png');">
@@ -121,7 +122,7 @@ $popular_products = $popular_products_result->fetch_all(MYSQLI_ASSOC);
                         <div class="name">The LuXe Necklace</div>
                         <div class="des">A timeless symbol of grace, the LuXe Necklace is designed to enhance your look with effortless sophistication. Crafted with care, it's a versatile piece that brings luxury to any occasion.</div>
                         <!-- Pass 'necklaces' as the category in the query string -->
-                        <a href="shop.php?category=necklaces"><button>Shop Now</button> </a>
+                        <a href="shop.php?category=necklace"><button>Shop Now</button> </a>
                     </div>
                 </div>
                 <div class="item" style="background-image: url('./Image/img5.png');">
@@ -129,7 +130,7 @@ $popular_products = $popular_products_result->fetch_all(MYSQLI_ASSOC);
                         <div class="name">The LuXe Earrings</div>
                         <div class="des">A touch of elegance in every detail. These earrings are designed to effortlessly elevate your style, offering a perfect blend of luxury and everyday wearability.</div>
                         <!-- Pass 'earrings' as the category in the query string -->
-                        <a href="shop.php?category=earrings"><button>Shop Now</button> </a>
+                        <a href="shop.php?category=earring"><button>Shop Now</button> </a>
                     </div>
                 </div>
             </div>
@@ -149,20 +150,20 @@ $popular_products = $popular_products_result->fetch_all(MYSQLI_ASSOC);
     <?php
     if (!empty($popular_products)) {
         foreach ($popular_products as $product) {
-            $avg_rating = round($product['avg_rating']);  
+            $avg_rating = round($product['avg_rating']);
             echo '
-            <div class="prod" data-id="' . $product['id'] . '" 
-                data-category="' . htmlspecialchars($product['category']) . '" 
-                data-name="' . htmlspecialchars($product['name']) . '" 
-                data-price="' . htmlspecialchars($product['price']) . '" 
+            <div class="prod" data-id="' . $product['id'] . '"
+                data-category="' . htmlspecialchars($product['category']) . '"
+                data-name="' . htmlspecialchars($product['name']) . '"
+                data-price="' . htmlspecialchars($product['price']) . '"
                 data-rating="' . htmlspecialchars($product['avg_rating']) . '">
-                <a href="sproduct.php?id=' . $product['id'] . '"> 
+                <a href="sproduct.php?id=' . $product['id'] . '">
                 <img src="' . htmlspecialchars($product['image_url']) . '" alt="' . htmlspecialchars($product['name']) . '">
                 <div class="des">
                 <span>LuXe</span>
                 <h2>' . htmlspecialchars($product['name']) . '</h2>
                 <div class="star">';
-            
+
             // Display the stars based on the average rating
             for ($i = 1; $i <= 5; $i++) {
                 if ($i <= $avg_rating) {

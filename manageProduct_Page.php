@@ -1,8 +1,60 @@
 <?php
 // Include the database connection
+session_start();
+
 include './config/dbconnection.php';
 
-// Handle product deletion
+
+if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] != 1) {
+    header("Location: ./index.php");
+    exit;
+}
+
+// Handle product update
+if (isset($_GET['edit']) && $_GET['edit'] == 1) {
+    $edit_id = $_GET['edit_id'];
+    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $description = mysqli_real_escape_string($conn, $_POST['description']);
+    $price = floatval($_POST['price']);
+    $category = mysqli_real_escape_string($conn, $_POST['category']);
+
+    $fetch_sql = "SELECT image_url FROM products WHERE id = ?";
+    $stmt = $conn->prepare($fetch_sql);
+    $stmt->bind_param("i", $edit_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    $image_url = $row['image_url']; // Default to old image
+
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
+
+        $target_base_dir = "./Image/";
+        $target_dir = "./uploads/";
+
+        $file_name = basename($_FILES['image']['name']);
+        $file_type = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+        $valid_extensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+        if (in_array($file_type, $valid_extensions) && $_FILES['image']['size'] <= 5000000) {
+            $image_url = "./Image/" . ucfirst($category) . "/" . $file_name;
+            move_uploaded_file($_FILES['image']['tmp_name'], $image_url);
+        }
+    }
+
+    $update_sql = "UPDATE products SET name = ?, description = ?, price = ?, image_url = ?, category = ? WHERE id = ?";
+    $stmt = $conn->prepare($update_sql);
+    $stmt->bind_param("ssdssi", $name, $description, $price, $image_url, $category, $edit_id);
+
+    if ($stmt->execute()) {
+        header('Location: manageProduct_Page.php');
+        exit();
+    } else {
+        echo "Error updating product: " . $stmt->error;
+    }
+}
+
+
 if (isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id'];
     $delete_sql = "DELETE FROM products WHERE id = ?";
@@ -17,7 +69,6 @@ if (isset($_GET['delete_id'])) {
     }
 }
 
-// Fetch all products from the database
 $sql = "SELECT * FROM products";
 $result = $conn->query($sql);
 ?>
@@ -34,7 +85,7 @@ $result = $conn->query($sql);
 
     <div class="container">
         <h2>Manage Products</h2>
-        
+
         <!-- Link to Add Product -->
         <a href="./addProduct_Page.php" class="btn">Add New Product</a>
 
@@ -59,7 +110,7 @@ $result = $conn->query($sql);
                             <td><?php echo $row['description']; ?></td>
                             <td><?php echo "₱" . number_format($row['price'], 2); ?></td>
                             <td><?php echo ucfirst($row['category']); ?></td>
-                            <td><img src="../<?php echo $row['image_url']; ?>" alt="<?php echo $row['name']; ?>" width="100"></td>
+                            <td><img src="<?php echo $row['image_url']; ?>" alt="<?php echo $row['name']; ?>" width="100"></td>
                             <td>
                                 <a href="manageProduct_Page.php?edit_id=<?php echo $row['id']; ?>" class="btn-edit">Edit</a>
                                 <a href="manageProduct_Page.php?delete_id=<?php echo $row['id']; ?>" class="btn-delete" onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>
@@ -67,11 +118,11 @@ $result = $conn->query($sql);
                         </tr>
 
                         <!-- Editable Form Row -->
-                        <?php if (isset($_GET['edit_id']) && $_GET['edit_id'] == $row['id']) : ?>
+                        <?php if (isset($_GET['edit_id']) && $_GET['edit_id'] == $row['id'])    : ?>
                             <tr>
                                 <td colspan="7">
                                     <h3>Edit Product</h3>
-                                    <form action="manageProduct_Page.php?edit_id=<?php echo $row['id']; ?>" method="POST" enctype="multipart/form-data">
+                                    <form action="manageProduct_Page.php?edit_id=<?php echo $row['id']; ?>&edit=1" method="POST" enctype="multipart/form-data">
                                         <table>
                                             <tr>
                                                 <td>Product Name</td>
@@ -121,43 +172,3 @@ $result = $conn->query($sql);
 
 </body>
 </html>
-
-<?php
-// Handle product update
-if (isset($_POST['name'])) {
-    $edit_id = $_GET['edit_id'];
-    $name = mysqli_real_escape_string($conn, $_POST['name']);
-    $description = mysqli_real_escape_string($conn, $_POST['description']);
-    $price = floatval($_POST['price']);
-    $category = mysqli_real_escape_string($conn, $_POST['category']);
-    
-    $image_url = $row['image_url']; // Default to old image
-
-    if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
-        $target_dir = "../uploads/";
-        $file_name = basename($_FILES['image']['name']);
-        $file_type = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
-        $valid_extensions = ['jpg', 'jpeg', 'png', 'gif'];
-
-        if (in_array($file_type, $valid_extensions) && $_FILES['image']['size'] <= 5000000) {
-            $target_file = $target_dir . uniqid() . "_" . $file_name;
-            if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
-                $image_url = $target_file;
-            }
-        }
-    }
-
-    $update_sql = "UPDATE products SET name = ?, description = ?, price = ?, image_url = ?, category = ? WHERE id = ?";
-    $stmt = $conn->prepare($update_sql);
-    $stmt->bind_param("ssdssi", $name, $description, $price, $image_url, $category, $edit_id);
-
-    if ($stmt->execute()) {
-        header('Location: manageProduct_Page.php?status=updated');
-        exit();
-    } else {
-        echo "Error updating product: " . $stmt->error;
-    }
-}
-
-$conn->close();
-?>
