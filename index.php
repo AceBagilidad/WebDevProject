@@ -15,7 +15,8 @@ $popular_products_query = "
     LEFT JOIN reviews r ON p.id = r.product_id
     GROUP BY p.id
     HAVING avg_rating > 2
-    ORDER BY avg_rating DESC";
+    ORDER BY avg_rating DESC
+    LIMIT 4";
 
 $popular_products_result = $conn->query($popular_products_query);
 $popular_products = $popular_products_result->fetch_all(MYSQLI_ASSOC);
