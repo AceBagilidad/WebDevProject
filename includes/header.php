@@ -16,8 +16,12 @@ include("config/dbconnection.php");
             <li><a href="shop.php">Shop</a></li>
             <li><a href="#about-section">About</a></li>
             <li class="nav-mobile"><a href="./cart.php">Cart</a></li>
+            <?php if(isset($_SESSION['username'])) : ?>
             <li class="nav-mobile"><a href="./reservationPage.php">Reservations</a></li>
             <li class="nav-mobile"><a href="javascript:void(0);" onclick="logoutConfirm()">Log Out</a></li>
+            <?php else : ?>
+            <li class="nav-mobile"><a href="./loginPage.php">Log In</a></li>
+            <?php endif; ?>
             <li id="nav-icon">
                 <?php if (isset($_SESSION['username'])): ?>
                     <!-- User is logged in -->

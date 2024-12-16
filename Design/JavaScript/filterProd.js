@@ -9,7 +9,7 @@ let filteredProducts = []; // This will store products filtered by category
 // Function to render the products (both for initial load and sorting/filtering)
 function renderProducts(products) {
     productsContainer.innerHTML = ''; // Clear previous products
-
+    s;
     if (products.length === 0) {
         productsContainer.innerHTML = '<p>No products found...</p>';
         return;
